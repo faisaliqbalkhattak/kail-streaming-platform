@@ -1,0 +1,36 @@
+{
+  "name": "kail(streaming-platform)",
+  "version": "1.0.0",
+  "description": "Kail Streaming Platform - A Node.js streaming application with Neon and Drizzle ORM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faisaliqbalkhattak/kail-streaming-platform-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/faisaliqbalkhattak/kail-streaming-platform-/issues"
+  },
+  "homepage": "https://github.com/faisaliqbalkhattak/kail-streaming-platform-#readme",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
+    "dotenv": "^17.3.1",
+    "drizzle-orm": "^0.45.1",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.9",
+    "javascript": "^1.0.0",
+    "jsx": "^0.9.89"
+  }
+}
