@@ -16,6 +16,14 @@ export const matchStatusEnum = pgEnum("match_status", [
   "finished",
 ]);
 
+// Export a JS-friendly constant for status values so code can import a single
+// source of truth instead of repeating string literals elsewhere.
+export const MATCH_STATUS = Object.freeze({
+  SCHEDULED: matchStatusEnum.enumValues[0],
+  LIVE: matchStatusEnum.enumValues[1],
+  FINISHED: matchStatusEnum.enumValues[2],
+});
+
 // ─── Matches ─────────────────────────────────────────────────────────────────
 
 export const matches = pgTable("matches", {
@@ -24,6 +32,7 @@ export const matches = pgTable("matches", {
   awayTeam: text("away_team").notNull(),
   sport: text("sport").notNull(),
   startTime: timestamp("start_time", { withTimezone: true }).notNull(),
+  endTime: timestamp("end_time", { withTimezone: true }).notNull(),
   status: matchStatusEnum("status").default("scheduled").notNull(),
   homeScore: integer("home_score").default(0).notNull(),
   awayScore: integer("away_score").default(0).notNull(),

@@ -42,9 +42,6 @@ public/
 # Optional npm cache directory
 .npm
 
-# TypeScript
-*.tsbuildinfo
-
 # Misc
 .DS_Store
 .vscode/
