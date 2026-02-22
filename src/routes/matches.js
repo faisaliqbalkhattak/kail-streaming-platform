@@ -12,7 +12,7 @@ export const matchRouter = Router();
 matchRouter.get('/', async (req, res) => {
     const parsed = listMatchesQuerySchema.safeParse(req.query);
     if (!parsed.success) {
-        return res.status(400).json({ errors: parsed.error.format(), details : JSON.stringify(parsed.error) });
+        return res.status(400).json({ errors: parsed.error.format(), details : parsed.error.issues });
     }
 
     const limit = parsed.data.limit ?? 50;
@@ -27,7 +27,7 @@ matchRouter.get('/', async (req, res) => {
         return res.status(200).json({ data: rows });
     } catch (e) {
         console.error('Failed to fetch matches:', e);
-        return res.status(500).json({ error: 'Failed to fetch matches', details : JSON.stringify(e)  });
+        return res.status(500).json({ error: 'Failed to fetch matches', details : e.message  });
     }
 });
 
@@ -35,7 +35,7 @@ matchRouter.post('/', async (req, res) => {
     const parsed = createMatchSchema.safeParse(req.body);
 
     if (!parsed.success) {
-        return res.status(400).json({ errors: parsed.error.format() , details : JSON.stringify(parsed.error) });
+        return res.status(400).json({ errors: parsed.error.format() , details : parsed.error.issues});
     }
 
     const { homeTeam, awayTeam, sport, startTime, endTime, homeScore, awayScore } = parsed.data;
@@ -58,6 +58,6 @@ matchRouter.post('/', async (req, res) => {
         res.status(201).json({ data: event });
     } catch (e) {
         console.error('Failed to create match:', e);
-        res.status(500).json({ error: 'Failed to create the match', details : JSON.stringify(e)  });
+        res.status(500).json({ error: 'Failed to create the match', details : e.message  });
     }
 });
