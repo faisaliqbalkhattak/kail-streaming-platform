@@ -55,6 +55,22 @@ export function attachWebSocketServer(server) {
     });
 
     wss.on('connection', async (socket, req) => {
+        if(wsArcjet) {
+            try {
+                const decision = await wsArcjet.protect(req);
+                if (decision.isDenied()) {
+                    const code = decision.reason.isRateLimit() ? 1013 : 1008;
+                    const reason = decision.reason.isRateLimit() ? 'Rate limit exceeded' : 'Forbidden';
+                    socket.close(code, reason);
+                    return;
+                }
+                
+            } catch (e) {
+                console.error('WS tracking/connection error', e);
+                socket.close(1002, 'Server security error');
+                return;
+            }
+        }
         socket.isAlive = true;
         socket.on('pong', () => { socket.isAlive = true; });
 
