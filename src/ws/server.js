@@ -2,7 +2,7 @@ import { WebSocket, WebSocketServer } from 'ws';
 
 function sendJson(socket, payload) {
 
-    if (socket.readyState !== WebSocket.OPEN) continue;
+    if (socket.readyState !== WebSocket.OPEN) return;
 
     socket.send(JSON.stringify(payload));
 
@@ -11,7 +11,7 @@ function sendJson(socket, payload) {
 
 function broadcast(wss, payload) {
     wss.clients.forEach(client => {
-        if (client.readyState !== WebSocket.OPEN) continue;
+        if (client.readyState !== WebSocket.OPEN) return;
         
         client.send(JSON.stringify(payload));
     });
