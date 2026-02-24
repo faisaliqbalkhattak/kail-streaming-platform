@@ -1,14 +1,23 @@
 import express from 'express';
+import cors from 'cors';
 import { matchRouter } from './routes/matches.js';
+import { commentaryRouter } from './routes/commentary.js';
 import { attachWebSocketServer } from './ws/server.js';
 import http from 'http';
-import { securityMiddleware } from './arcject.js';
+import { securityMiddleware } from './arcjet.js';
 
 const PORT = Number(process.env.PORT) || 8000;
 const HOST = process.env.HOST || '0.0.0.0';
 
 const app = express();
 const server = http.createServer(app);
+
+// Configure CORS to allow frontend connections
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
