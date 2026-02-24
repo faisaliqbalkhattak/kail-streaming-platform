@@ -11,7 +11,7 @@ export const StatusIndicator: React.FC<StatusIndicatorProps> = ({ status }) => {
       case 'connected':
         return { color: 'bg-green-400', text: 'Live Connected' };
       case 'connecting':
-        return { color: 'bg-yellow-400', text: 'Connecting...' };
+        return { color: 'bg-green-600', text: 'Connecting...' };
       case 'reconnecting':
         return { color: 'bg-orange-400', text: 'Reconnecting...' };
       case 'error':

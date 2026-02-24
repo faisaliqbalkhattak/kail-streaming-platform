@@ -129,7 +129,7 @@ export const MatchCard: React.FC<MatchCardProps> = ({ match, isActive, onWatch, 
               px-4 py-2 rounded-full font-bold text-sm border-2 border-black transition-all
               ${isActive 
                 ? 'bg-brand-blue text-black cursor-default opacity-100' 
-                : 'bg-brand-yellow text-black hover:bg-yellow-300 active:translate-y-0.5'
+                : 'bg-brand-yellow text-white hover:bg-green-700 active:translate-y-0.5'
               }
             `}
           >
